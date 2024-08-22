@@ -11,6 +11,4 @@ Creating Tables
 
 Web App
 -------
-- The web app is hosted on public cloud and the URL to the web page is https://cse-560-dmql-proj-rangers.streamlit.app/ and the same is mentioned in the project report.
-
 - The code for the web page "app.py" is included in the project module.
