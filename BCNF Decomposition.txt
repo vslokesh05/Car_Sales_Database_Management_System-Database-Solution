@@ -1,0 +1,31 @@
+1. customers
+	a. customer_id --> name, email, phone_number
+	b. email --> name
+	c. phone_number --> name
+2. customer_address
+	a. customer_id --> address, city, state, zipcode
+	b. address, city, state --> zipcode (Not in BCNF)
+	c. zipcode --> state (Not in BCNF)
+	This FD is not in BCNF. Thus we need to decompose this.
+	Closure of {zipcode}
+		{zipcode}+ = {zipcode, state}
+		Split the table into 2 relations {zipcode, state} and {zipcode, address, city, customer_id}. This is in BCNF since {customer_id} and {address, city} are keys for the relation.
+3. vehicles
+	a. vehicle_id --> type, make, model, year, vin, availability, customer_id
+	b. vin --> type, make, model, year
+	c. model --> make (Not in BCNF)
+	This FD is not in BCNF. Thus we need to decompose this.
+	Closure of {model} is:
+		{model}+ = {model, make}. The key is {model}.
+		Split this relation into 2 relation {model, make}, {type, model, year, vin, availability, customer_id, vehicle_id}. This is in BCNF.
+4. vehicle_details
+	a. vehicle_id --> miles_used, color, engine_type, transmission_type, fuel_type, number_of_seats
+	b. engine_type --> fuel_type (Not in BCNF)
+	Closure of {engine_type} is:
+		{engine_type}+ = {engine_type, fuel_type}.
+		Split this relation into 2 relations {engine_type, fuel_type} and {engine_type, vehicle_id, miles_used, color, transmission_type, number_of_seats}. This is in BCNF.
+5. sales
+	a. sale_id --> vehicle_id, customer_id, sale_date, sale_price
+	b. vehicle_id --> customer_id, sale_date, sale_price
+6. price_history
+	a. vehicle_id, price_recorded_date --> price.
